@@ -1,0 +1,51 @@
+<div class="modal fade" id="crud-model-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog {{if mode_delete 'modal-sm' 'modal-lg'}}" role="document">
+    <div class="modal-content">
+      <div class="modal-header {{if mode_delete 'bg-danger text-white'}} {{if mode_create 'bg-primary text-white'}} {{if mode_update 'bg-info text-white'}}">
+        <h5 class="modal-title" id="exampleModalLabel">
+          {{#if mode_create}}
+            Add a New {{entityName}}
+          {{/if}}
+          {{#if mode_update}}
+            Updating {{entityName}} {{get model entityIdentifier}}
+          {{/if}}
+          {{#if mode_delete}}
+            You're about to delete a record!
+          {{/if}}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{#unless mode_delete}}
+          <form method="post" class="form-horizontal container-fluid">
+            {{#each-in fields as |field config|}}
+              {{#if config.update}}
+                {{crud-cell model=model field=field configuration=config mode='edit' tagName='div' class='row form-group'}}
+              {{/if}}
+            {{/each-in}}
+            <input type="submit" style="display:none;">
+          </form>
+          {{else}}
+            Deleting the record: <strong>{{get model entityIdentifier}}</strong> is a permanant action.
+        {{/unless}}
+      </div>
+      <div class="modal-footer">
+        <div id="crud-model-alert" class="alert alert-danger collapse hide" role="alert"></div>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" {{action 'cancel'}}>Cancel</button>
+        <button type="button" class="btn {{if mode_delete 'btn-danger'}} {{if mode_update 'btn-info'}} {{if mode_create 'btn-primary'}}" {{action 'validate'}}>
+          {{#if mode_create}}
+            Create
+          {{/if}}
+          {{#if mode_update}}
+            Update
+          {{/if}}
+          {{#if mode_delete}}
+            Delete
+          {{/if}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

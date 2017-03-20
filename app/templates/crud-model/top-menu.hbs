@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-sm-6 btn-group" role="group" aria-label="Basic example">
+    {{#if fields}}
+      {{partial 'crud-model/fields'}}
+    {{/if}}
+    {{#if refresh}}
+      <button type="button" class="btn btn-secondary" {{action 'refresh'}}><i class="fa fa-refresh {{if loading 'fa-spin'}}"/></button>
+    {{/if}}
+    {{#if create}}
+      <button {{action 'createRecord'}} type="button" class="btn btn-primary" data-toggle="modal" data-target="#crud-model-modal"><i class="fa fa-asterisk"/> New {{entityName}}</button>
+    {{/if}}
+  </div>
+  {{#unless original_model}}
+    {{#if searchProperty}}
+      <div class="col-sm-6 input-group">
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown">{{searchProperty}}</button>
+          <div class="dropdown-menu">
+            {{#each-in model as |field config|}}
+              {{#if config.search}}
+                <a class="dropdown-item" href="#" {{action 'searchField' field}}>{{field}}</a>
+              {{/if}}
+            {{/each-in}}
+          </div>
+        </div>
+        {{input enter="search" value=searchTerm placeholder="Search" class="input-sm form-control" id="SearchTerm" }}
+        <span class="input-group-btn">
+        <a href="#" role="button" class="btn btn-secondary" {{action 'searchLocal' this}} data-action=search> Local</a>
+      </span>
+        <span class="input-group-btn">
+        <a href="#?{{searchProperty}}={{searchTerm}}" role="button" class="btn btn-primary" {{action 'search' this}} data-action=search> Search</a>
+      </span>
+      </div>
+    {{/if}}
+    {{else}}
+      <span class="btn bg-faded">{{searchProperty}} : {{searchTerm}}</span>
+      <span type="button" class="badge badge-default text-white close" aria-label="Close" {{action 'clearSearch'}}>
+        <span aria-hidden="true">&times;</span>
+      </span>
+  {{/unless}}
+</div>

@@ -1,0 +1,5 @@
+{{partial 'crud-model/top-menu'}}
+<div class="filters"></div>
+{{crud-table model=datamodel fields=model read=read delete=(action 'delete') edit=(action 'edit')  toggleSort=(action 'toggleSort') classHeaders=rowHeaderStyle entityIdentifier=entityIdentifier}}
+{{partial 'crud-model/paginator'}}
+{{crud-modal parent=(action 'child') errorParser=errorParser create=create update=update delete=delete cancel=(action 'cancel') fields=model entityName=entityName rowHeaderStyle=rowHeaderStyle entityIdentifier=entityIdentifier}}

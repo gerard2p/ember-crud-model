@@ -1,0 +1,54 @@
+{{#unless original_model}}
+{{#if paginator.render}}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="dropup">
+          <a class="btn btn-secondary dropdown-toggle" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{paginator.limit}}</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#" {{action 'setLimit' 10}}>10</a>
+            <a class="dropdown-item" href="#" {{action 'setLimit' 25}}>25</a>
+            <a class="dropdown-item" href="#" {{action 'setLimit' 50}}>50</a>
+            <a class="dropdown-item" href="#" {{action 'setLimit' 100}}>100</a>
+            <a class="dropdown-item" href="#" {{action 'setLimit' 'All'}}>All</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <h5>
+          <span class="badge badge-default">{{paginator.from}}</span>
+           to
+           <span class="badge badge-default">{{paginator.to}}</span>
+            of
+           <span class="badge badge-default">{{paginator.total}}</span>
+           {{entityName}}
+        </h5>
+      </div>
+      <div class="col">
+        <nav>
+          {{#if paginator.links}}
+          <ul class="pagination justify-content-end pagination-md">
+            <li class="page-item {{unless paginator.previous 'disabled'}}">
+              <a class="page-link " href="#" aria-label="Previous" {{action 'goto' paginator.previous}}>
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            {{#each paginator.links key="@index" as |link|}}
+              <li class="page-item {{if link.current 'active'}}"><a {{action 'goto' link.page}} class="page-link" href="#page{{link.page}}">{{link.page}}</a></li>
+            {{/each}}
+            <li class="page-item {{unless paginator.next 'disabled'}}">
+              <a class="page-link" href="#" aria-label="Next" {{action 'goto' paginator.next}}>
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+          {{/if}}
+        </nav>
+      </div>
+    </div>
+  </div>
+
+{{/if}}
+{{/unless}}

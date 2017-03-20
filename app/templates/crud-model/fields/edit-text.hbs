@@ -1,0 +1,10 @@
+<label class="col-2 col-form-label">{{configuration.label}}</label>
+<div class="col-10 input-group">
+  {{#if configuration.prefix}}
+    <div class="input-group-addon">{{configuration.prefix}}</div>
+  {{/if}}
+  {{input name=field type=configuration.type value=(get model field) class="form-control" placeholder=configuration.placeholder required=configuration.required pattern=configuration.pattern}}
+  {{#if configuration.sufix}}
+    <div class="input-group-addon">{{configuration.sufix}}</div>
+  {{/if}}
+</div>

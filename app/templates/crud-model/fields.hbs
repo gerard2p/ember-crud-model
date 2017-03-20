@@ -1,0 +1,10 @@
+<div class="btn-group">
+  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-th-list"/></button>
+  <div class="dropdown-menu">
+    {{#each-in model as |field config|}}
+      {{#if config.list}}
+      <a class="dropdown-item" href="#" {{action 'toggleField' config}}><span class="fa {{if config.display 'fa-check-square-o' 'fa-square-o'}}"> </span> {{field}}</a>
+      {{/if}}
+    {{/each-in}}
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<thead>
+  {{#crud-row classNames=classHeaders}}
+    {{#each-in fields as |field config|}}
+      {{#if config.display}}
+        {{#if config.list}}
+          <th>
+            {{#if config.sort}}
+              <button {{action 'toggleSort' field}} class="btn btn-outline-secondary btn-sm fa fa-{{config.sort}}"></button>
+            {{/if}}
+            <span>{{config.label}}</span>
+          </th>
+        {{/if}}
+      {{/if}}
+    {{/each-in}}
+    <th colspan="2" style="width:80px">Actions</th>
+  {{/crud-row}}
+</thead>
+<tbody>
+  {{#each model key="@index" as |record|}}
+    {{#crud-row}}
+      {{#each-in fields as |field config|}}
+        {{#if config.display}}
+          {{#if config.list}}
+            {{crud-cell model=record field=field configuration=config}}
+          {{/if}}
+        {{/if}}
+      {{/each-in}}
+      {{partial 'crud-model/buttons/edit'}}
+      {{partial 'crud-model/buttons/delete'}}
+    {{/crud-row}}
+  {{/each}}
+</tbody>
